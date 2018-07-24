@@ -17,10 +17,10 @@ describe "Checkout" do
             end
         end
     end
-    describe "#scan" do
-        context "when given a new item" do
-            it "should update the total price"
-            end
-        end
-    end
+    #describe "#scan" do
+    #    context "when given a new item" do
+    #        it "should update the total price"
+    #        end
+    #    end
+    #end
 end

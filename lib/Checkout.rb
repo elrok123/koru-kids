@@ -5,7 +5,7 @@ class Checkout
     @total_price = 0
 
     # Sets up the base class instance
-    def initialize(rules)
+    def initialize(rules: [])
        @item_rules = rules 
 
     end

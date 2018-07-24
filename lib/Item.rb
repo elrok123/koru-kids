@@ -10,6 +10,5 @@ class Item
         @price = price
         @discount_quantity = discount_quantity
         @discount_amount = discount_amount
-        
     end
 end

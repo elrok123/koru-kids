@@ -19,4 +19,7 @@ class Item
             discount_amount: @discount_amount
         }
     end
+    def name
+        return @name
+    end
 end

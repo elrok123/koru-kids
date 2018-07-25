@@ -76,8 +76,9 @@ class Checkout
     
     # Scans items into the system
     def scan(items)
+        items = Array(items)
 
-        items.to_a.each do |item|
+        items.each do |item|
             # Add the item to the checkout's current_items instance var
             @current_items << item    
 

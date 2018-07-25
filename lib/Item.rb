@@ -1,4 +1,8 @@
-require "./lib/Rule.rb"
+class Item 
+    attr_accessor :name
 
-class Item < Rule 
+    def initialize(name: "")
+        # Set up our base class variables
+        self.name = name
+    end
 end

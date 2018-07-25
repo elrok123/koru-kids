@@ -12,18 +12,20 @@ class Item
         @discount_amount = discount_amount
     end
 
-    # Return all the properties belong to the Class instance
-    def get_details
-        return {
-            name: @name,
-            price: @price,
-            discount_quantity: @discount_quantity,
-            discount_amount: @discount_amount
-        }
-    end
-    
     # Method to return the name instance variable, needed for grouping Items
-    def name
+    def self.name
         return @name
+    end
+    # Method to return the price instance variable
+    def self.price
+        return @price
+    end
+    # Method to return the discount_quantity instance variable
+    def self.
+        return @price
+    end
+    # Method to return the discount_amount instance variable
+    def self.price
+        return @price
     end
 end

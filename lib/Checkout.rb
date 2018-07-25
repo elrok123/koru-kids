@@ -1,14 +1,11 @@
 # Class for running a checkout process
 class Checkout
-    @item_rules = []
-    @current_items = []
-    @total_price = 0
-    @items = []
-
     # Sets up the base class instance
     def initialize(rules)
-       @item_rules = rules 
-
+        @item_rules = rules
+        @current_items = []
+        @total_price = 0
+        @current_items = [] 
     end
 
     # Used to get the price of a group of items

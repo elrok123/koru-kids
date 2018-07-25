@@ -20,7 +20,7 @@ class Checkout
         # We need to store a new total, so lets store it in a new var total_price
         grouped_items_total_price = 0
 
-        # Here we iterate 
+        # Here we iterate over our group of items
         item_group.each do |item|
             # Get the item price from our saved rules
             item_price = self.get_item_price(item).price
@@ -28,6 +28,9 @@ class Checkout
             # Add the item price to the total
             grouped_items_total_price = grouped_items_total_price + item_price
         end
+
+        # Here we apply our discount to the grouped_items_total_price (if applicable)
+        grouped_items_total_price = grouped_items_total_price - self.calculate_discount
 
         # Return the price of the grouped items
         return grouped_items_total_price

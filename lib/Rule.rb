@@ -1,7 +1,9 @@
 require "./lib/Item"
 
 class Rule < Item 
+
     attr_accessor :name, :price, :discount_quantity, :discount_amount
+
     def initialize(name: "", price: 0, discount_quantity: 0, discount_amount: 0)
         self.name = name
         self.price = price

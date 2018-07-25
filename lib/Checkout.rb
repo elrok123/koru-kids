@@ -40,12 +40,17 @@ class Checkout
     def update_total
         # Group our items by their name
         grouped_items = @current_items.group_by {|item| item.name }
+
         # Create a variable that we can use to store all of our total prices for each group of items
         grouped_prices = []
         
         # Iterate over each item group and pass each group to calculate_group_by, then store each group total price in grouped_totals 
         grouped_items.each_key do |item_group|
-            grouped_prices << self.calculate_group_total(grouped_items[item_group])
+            # Calculate our group total and store 
+            group_total = self.calculate_group_total(grouped_items[item_group]) 
+
+            # Add to our grouped item prices array
+            grouped_prices << group_total 
         end unless @current_items.count == 0 # Ensure that we don't iterate over an empty array
 
         # Sum all group item prices
@@ -59,6 +64,7 @@ class Checkout
     def scan(item)
         # Add the item to the checkout's current_items instance var
         @current_items << item    
+
         # We then update the total of the checkout to keep everything up to date
         self.update_total
     end

@@ -10,9 +10,23 @@ class Checkout
         @current_items = [] 
     end
 
-    def get_item_price(item)
+    def get_item_rule(item)
         # Get the price of the item by selecting the checkout rule that matches the name of the item
         return @item_rules.select{|item_rule| item_rule.name == item.name }[0]
+    end
+
+    def calculate_discount(grouped_items)
+        # Create our base discount variable
+        discount = 0  
+
+        # Use the first item in the group to get the rule to apply
+        item_rule = self.get_item_rule grouped_items[0]
+
+        # Calculate the discount to apply from the item rule discount amount and quantity with the number of items in the group
+        discount_amount = (grouped_items.count / item_rule.discount_quantity) * item_rule.discount_amount
+
+        # Return the discount to be applied
+        return discount_amount
     end
 
     # Used to get the price of a group of items
@@ -23,14 +37,14 @@ class Checkout
         # Here we iterate over our group of items
         item_group.each do |item|
             # Get the item price from our saved rules
-            item_price = self.get_item_price(item).price
+            item_price = self.get_item_rule(item).price
 
             # Add the item price to the total
             grouped_items_total_price = grouped_items_total_price + item_price
         end
 
         # Here we apply our discount to the grouped_items_total_price (if applicable)
-        grouped_items_total_price = grouped_items_total_price - self.calculate_discount
+        grouped_items_total_price = grouped_items_total_price - self.calculate_discount(item_group)
 
         # Return the price of the grouped items
         return grouped_items_total_price
@@ -60,13 +74,16 @@ class Checkout
         @total_price = new_total 
     end
     
-    # Scans an item into the system
-    def scan(item)
-        # Add the item to the checkout's current_items instance var
-        @current_items << item    
+    # Scans items into the system
+    def scan(items)
 
-        # We then update the total of the checkout to keep everything up to date
-        self.update_total
+        items.to_a.each do |item|
+            # Add the item to the checkout's current_items instance var
+            @current_items << item    
+
+            # We then update the total of the checkout to keep everything up to date
+            self.update_total
+        end
     end
     
     # Returns the checkout total minus item discounts

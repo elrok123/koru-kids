@@ -5,9 +5,18 @@ class Checkout
     # Sets up the base class instance
     def initialize(rules)
         @item_rules = rules
-        @current_items = []
         self.total_price = 0
         @current_items = [] 
+    end
+
+    # Simple method to print a list of items
+    def print_item_list
+        @current_items.each_with_index do |item, item_no|
+            puts "Item #{item_no+1}"
+            puts "----------------"
+            puts "Item Name: #{item.name}"
+            puts "----------------"
+        end
     end
 
     def get_item_rule(item)
@@ -17,13 +26,15 @@ class Checkout
 
     def calculate_discount(grouped_items)
         # Create our base discount variable
-        discount = 0  
+        discount_amount = 0  
 
         # Use the first item in the group to get the rule to apply
         item_rule = self.get_item_rule grouped_items[0]
 
         # Calculate the discount to apply from the item rule discount amount and quantity with the number of items in the group
-        discount_amount = (grouped_items.count / item_rule.discount_quantity) * item_rule.discount_amount
+        if grouped_items.count > 0 && item_rule.discount_quantity > 0 
+            discount_amount = (grouped_items.count / item_rule.discount_quantity) * item_rule.discount_amount
+        end
 
         # Return the discount to be applied
         return discount_amount
@@ -69,6 +80,9 @@ class Checkout
 
         # Sum all group item prices
         new_total = grouped_prices.sum
+
+        # If the new total is greater than 150 subtract 20 
+        new_total = new_total - 20 unless new_total <= 150 
 
         # Update total price
         @total_price = new_total 

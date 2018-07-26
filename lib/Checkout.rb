@@ -90,7 +90,7 @@ class Checkout
 
     def filter_bad_items(items)
         items = items.select do |item|
-            @item_rules.select {|item_rule| item_rule.name == item.name }.count > 0
+            (@item_rules.select {|item_rule| item_rule.name == item.name }.count > 0) unless item.nil? 
         end
     end
     

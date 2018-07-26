@@ -10,6 +10,13 @@ describe Item do
                 expect(item.name).to eq("A")
             end
         end
+        context "when given invalid item parameters" do
+            it "should return nil" do
+                item = Item.new(name: "")
+
+                expect(item.name).to eq(nil)
+            end
+        end
     end
 end
 

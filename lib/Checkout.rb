@@ -87,17 +87,33 @@ class Checkout
         # Update total price
         @total_price = new_total 
     end
+
+    def filter_bad_items(items)
+        items = items.select do |item|
+            @item_rules.select {|item_rule| item_rule.name == item.name }.count > 0
+        end
+    end
     
     # Scans items into the system
     def scan(items)
         items = Array(items)
 
-        items.each do |item|
-            # Add the item to the checkout's current_items instance var
-            @current_items << item    
+        # Prune any items we don't have rules for 
+        items = self.filter_bad_items items 
 
-            # We then update the total of the checkout to keep everything up to date
-            self.update_total
+        if items.count > 0
+            items.each do |item|
+                # Add the item to the checkout's current_items instance var
+                @current_items << item    
+                
+                puts "+ Added item #{item.name} to the checkout."
+
+                # We then update the total of the checkout to keep everything up to date
+                self.update_total
+            end 
+        else
+            # Output nil scan to user
+            puts "- No valid items provided, skipping scan..."
         end
     end
     

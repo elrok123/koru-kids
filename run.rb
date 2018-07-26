@@ -4,6 +4,7 @@ require "./lib/Checkout"
 
 rules = [
 	Rule.new(name: "A", price: 30, discount_quantity: 3, discount_amount: 15),
+	Rule.new(name: "A", price: 30, discount_quantity: 3, discount_amount: 15),
 	Rule.new(name: "B", price: 20, discount_quantity: 2, discount_amount: 5),
 	Rule.new(name: "C", price: 50, discount_quantity: 0, discount_amount: 0),
 	Rule.new(name: "D", price: 15, discount_quantity: 0, discount_amount: 0)

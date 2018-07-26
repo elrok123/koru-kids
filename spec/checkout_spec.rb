@@ -17,6 +17,16 @@ describe "Checkout" do
                 expect(Checkout.new(rules)).not_to eq(nil)
             end
         end
+        context "when we create a new instance with rules" do
+            it "should return a checkout instance" do
+                # Create some item rules to be used
+                rules = [
+                ]    
+
+                expect{ Checkout.new(rules) }.to raise_error(ArgumentError)
+            end
+        end
+
     end
     describe "#scan" do
         context "when given a new item" do

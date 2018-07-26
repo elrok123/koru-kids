@@ -12,9 +12,8 @@ describe Item do
         end
         context "when given invalid item parameters" do
             it "should return nil" do
-                item = Item.new(name: "")
-
-                expect(item.name).to eq(nil)
+                expect { Item.new(name: nil) }.to raise_error(ArgumentError)
+                expect { Item.new(name: "") }.to raise_error(ArgumentError)
             end
         end
     end

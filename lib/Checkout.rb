@@ -4,7 +4,12 @@ class Checkout
 
     # Sets up the base class instance
     def initialize(rules)
-        @item_rules = rules
+        # Check that we were given at least one rule
+        if rules.to_a.count > 0
+            @item_rules = rules
+        else
+            raise ArgumentError, "Invalid number of rules passed, please provide at least one rule..."
+        end
         self.total_price = 0
         @current_items = [] 
     end

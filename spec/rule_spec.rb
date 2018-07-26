@@ -14,6 +14,12 @@ describe Rule do
                 expect(rule.send(:discount_amount)).to eq(20)
             end
         end
+        context "when given invalid item parameters" do
+            it "should return nil" do
+                expect { Rule.new(name: "") }.to raise_error(ArgumentError)
+                expect { Rule.new(name: nil) }.to raise_error(ArgumentError)
+            end
+        end
     end
 end
 
